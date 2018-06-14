@@ -128,10 +128,12 @@ strong {
     visibility: hidden;
   }
 }
+
 th {
   &:hover {
-    color:#007bff;
-    cursor: pointer;  
+    color: #007bff;
+    cursor: pointer;
   }
 }
+
 @import "media"; // Always at the end

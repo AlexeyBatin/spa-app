@@ -332,7 +332,6 @@ function RenderBooks(element) {
     <th scope="col" data-type="number">Количество страниц</th>
     <th scope="col" data-type="string">Жанр</th>
     <th scope="col"></th>
-    <th scope="col"></th>
   </tr>
 </thead>
 <tbody id="tablebody"></tbody>`;
