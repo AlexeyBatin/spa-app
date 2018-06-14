@@ -67,8 +67,7 @@ strong {
     margin-top: 2em;
     display: block;
     width: 100%;
-    @extend .btn-primary,
-    .btn-lg;
+    @extend .btn-primary;
   }
   @at-root #{&}__list {
     margin-top: 2em;
@@ -124,7 +123,7 @@ strong {
   display: block;
   margin: 0 auto;
   @at-root #{&}--hidden {
-    display: none;
+    visibility: hidden;
   }
 }
 

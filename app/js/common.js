@@ -14,7 +14,7 @@ class Author {
     this.books = books;
   }
 }
-Author.count = 0;
+
 
 class Book {
   static showCount() {
@@ -28,14 +28,16 @@ class Book {
     this.genre = genre;
   }
 }
+
 Book.count = 0;
+Author.count = 0;
 
 
+const genres = ['Роман', 'Поема', 'Фантастика'];
 // MAIN CODE
 
 
-
-let test = [new Author("TEST", 'TEST', 'TEST', 'TEST', [new Book('hello', 12, 2), new Book('hello', 12, 2), new Book('hello', 12, 2), new Book('hello', 12, 2)]), new Author("TEST", 'TEST', 'TEST', 'TEST'), new Author("TEST", 'TEST', 'TEST', 'TEST')];
+let test = [];
 localStorage.setItem('authors', JSON.stringify(test));
 
 var localValue = JSON.parse(getLocalStorage(localStorage));
@@ -156,6 +158,39 @@ card.onsubmit = (evt) => {
   CardRender(authorID);
   ListRender(localValue);
 };
+let AddBookButton = document.getElementById("addBookButton");
+AddBookButton.onclick = () => {
+  let remove = document.getElementById('genre');
+  while (remove.firstChild) {
+    remove.removeChild(remove.firstChild);
+  }
+  let generateSelect = document.getElementById('genre');
+  genres.forEach(element => {
+    let select = document.createElement('option');
+    select.setAttribute('value', `${element}`)
+    select.innerHTML = `${element}`;
+    generateSelect.appendChild(select);
+  });
+}
+
+let addNewGenre = document.getElementById('addNewGenre');
+addNewGenre.onclick = () => {
+  let newGenre = prompt('Какой жанр хотите добавить?', '');
+  var regexp = /^[A-Za-zА-Яа-яЁё\s]/;
+  if (regexp.test(newGenre)) {
+    newGenre.toLowerCase();
+    let formatedGenre = newGenre[0].toUpperCase() + newGenre.toLowerCase().slice(1);
+    let checkGenre = genres.indexOf(formatedGenre);
+    if (!~checkGenre) {
+      genres.push(formatedGenre);
+      alert(formatedGenre);
+    } else {
+      alert('Такой жанр уже есть');
+    }
+  } else {
+    alert('Некоректные данные');
+  }
+}
 
 // FUNCTIONS
 
@@ -219,29 +254,29 @@ function CardRender(id) {
       card.appendChild(newTitle);
       let surnameInput = document.createElement('div');
       surnameInput.classList.add('form-group', 'row');
-      surnameInput.innerHTML = `<label for="staticSurname" class="col-sm-2 offset-sm-4 col-form-label">Фамилия</label>
-      <div class="col-12 col-sm-4">
+      surnameInput.innerHTML = `<label for="staticSurname" class="col-sm-2  col-form-label">Фамилия</label>
+      <div class="col-sm-10">
         <input type="text" readonly class="form-control-plaintext" pattern="[A-Za-zА-Яа-яЁё]{2,}" id="staticSurname" value="${element.surname}" required>
       </div>`;
       card.appendChild(surnameInput);
       let nameInput = document.createElement('div');
       nameInput.classList.add('form-group', 'row');
-      nameInput.innerHTML = `<label for="staticName" class="col-sm-2 offset-sm-4 col-form-label">Имя</label>
-      <div class="col-12 col-sm-4">
+      nameInput.innerHTML = `<label for="staticName" class="col-sm-2 col-form-label">Имя</label>
+      <div class="col-sm-10">
         <input type="text" readonly class="form-control-plaintext" pattern="[A-Za-zА-Яа-яЁё]{2,}" id="staticName" value="${element.name}" required>
       </div>`;
       card.appendChild(nameInput);
       let patronymicInput = document.createElement('div');
       patronymicInput.classList.add('form-group', 'row');
-      patronymicInput.innerHTML = `<label for="staticPatronymic" class="col-sm-2 offset-sm-4 col-form-label">Отчество</label>
-      <div class="col-12 col-sm-4">
+      patronymicInput.innerHTML = `<label for="staticPatronymic" class="col-sm-2 col-form-label">Отчество</label>
+      <div class="col-sm-10">
         <input type="text" readonly class="form-control-plaintext" pattern="[A-Za-zА-Яа-яЁё]{2,}" id="staticPatronymic" value="${element.patronymic}">
       </div>`;
       card.appendChild(patronymicInput);
       let birthdayInput = document.createElement('div');
       birthdayInput.classList.add('form-group', 'row');
-      birthdayInput.innerHTML = `<label for="staticBirthday" class="col-sm-2 offset-sm-4 col-form-label">Дата рождения</label>
-      <div class="col-12 col-sm-4">
+      birthdayInput.innerHTML = `<label for="staticBirthday" class="col-sm-2  col-form-label">Дата рождения</label>
+      <div class="col-sm-10">
         <input type="date" readonly class="form-control-plaintext" id="staticBirthday" value="${element.birthday}"required>
       </div>`;
       card.appendChild(birthdayInput);
@@ -294,12 +329,24 @@ function RenderBooks(element) {
   for (let i = 0; i < btnchange.length; i++) {
     const element = btnchange[i];
     element.onclick = function () {
+
+      let remove = document.getElementById('modalbook__genre');
+      while (remove.firstChild) {
+        remove.removeChild(remove.firstChild);
+      }
+      let generateSelect = document.getElementById('modalbook__genre');
+      genres.forEach(element => {
+        let select = document.createElement('option');
+        select.setAttribute('value', `${element}`)
+        select.innerHTML = `${element}`;
+        generateSelect.appendChild(select);
+      });
       let bookID = document.getElementById('bookID');
       bookID.value = this.getAttribute('data-bookID');
       let selfRow = this.parentElement.parentElement.parentElement;
       document.getElementById('modalbook__bookTitle').value = selfRow.childNodes[0].innerHTML;
       document.getElementById('modalbook__pageAmount').value = selfRow.childNodes[2].innerHTML;
-      document.getElementById('modalbook__genre').value = +selfRow.childNodes[4].innerHTML;
+      document.getElementById('modalbook__genre').value = selfRow.childNodes[4].innerHTML;
     };
   }
   let btnDelete = document.getElementsByClassName("button__delete");
@@ -315,7 +362,7 @@ function RenderBooks(element) {
 }
 
 function DeleteBook(id, bookID) {
-  if (confirm('Вы уверены что хотите удалить книгу?? Element ID ' + id + `Book ID : ${bookID}`)) {
+  if (confirm('Вы уверены что хотите удалить книгу??')) {
     localValue.forEach(element => {
       if (element.ID == id) {
         let elementBooks = element.books;
@@ -328,7 +375,5 @@ function DeleteBook(id, bookID) {
     });
     CardRender(id);
   }
-
 }
 
-// data-target="#ModalBook" data-toggle="modal"

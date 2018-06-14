@@ -27,7 +27,7 @@
 </head>
 
 <body>
-
+  
   <div class="container-fluid">
     <div class="row">
       <!-- AUTHORS -->
@@ -43,8 +43,8 @@
             <button class="authors__btn btn" type="button">Sort</button>
           </div>
         </div>
-        <button type="button" class="authors__btn--primary btn" data-toggle="modal" data-target="#ModalAuthor">Добавить автора</button>
-
+        <button type="button" class="btn btn-outline-primary btn-block mt-4" id='addNewGenre'>Новый жанр</button>
+        <button type="button" class="authors__btn--primary btn" data-toggle="modal" data-target="#ModalAuthor">Новый автор</button>
         <div class="authors__list" id="list">
           <!-- <button type="button" class="authors__item authors__item--active">Имя Фамилия</button> -->
         </div>
@@ -54,7 +54,7 @@
       <main class="viewbox">
         <div class="card">
           <form class="card__info" id='card'>
-
+            <h3 class='display-4 pt-4 text-center'>Выберите автора из меню <br> Создайте нового если список пуст</h3>
           </form>
           <div class="card__table" id='card__table'>
 
@@ -63,9 +63,9 @@
       </main>
       <aside class="actions">
         <div class="actions__buttons" role="group" aria-label="Vertical button group">
-          <button type="button" class="btn btn-lg btn-outline-secondary" id="editCard">Редактировать</button>
-          <button type="button" class="btn btn-lg btn-outline-primary" data-toggle="modal" data-target="#Modal">Добавить книгу</button>
-          <button type="button" class="btn btn-lg btn-outline-danger">Удалить</button>
+          <button type="button" class="btn  btn-outline-secondary" id="editCard">Редактировать</button>
+          <button type="button" class="btn  btn-outline-primary" id="addBookButton" data-toggle="modal" data-target="#Modal">Добавить книгу</button>
+          <button type="button" class="btn  btn-outline-danger">Удалить</button>
         </div>
       </aside>
     </div>
@@ -93,11 +93,7 @@
             <div class="form-group">
               <label for="genre" class="col-form-label">Жанр:</label>
               <select class="form-control" id="genre" required>
-                <option>1</option>
-                <option selected>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+
               </select>
             </div>
             <div class="modal-footer">
@@ -136,11 +132,7 @@
             <div class="form-group">
               <label for="genre" class="col-form-label">Жанр:</label>
               <select class="form-control" id="modalbook__genre" required>
-                <option>1</option>
-                <option selected>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                
               </select>
             </div>
             <div class="modal-footer">
