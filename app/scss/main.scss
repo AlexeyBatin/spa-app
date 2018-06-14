@@ -98,7 +98,9 @@ strong {
     .mb-4;
   }
   @at-root #{&}__table {
-    @extend .card-body,.table-responsive,.table-striped;
+    @extend .card-body,
+    .table-responsive,
+    .table-striped;
   }
 }
 
