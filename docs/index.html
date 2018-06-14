@@ -33,14 +33,14 @@
       <!-- AUTHORS -->
       <aside class="authors">
         <div class="authors__sort">
-          <select class="authors__select" id="inputGroupSelect">
-            <option class="authors__option" selected disabled>Sort by ...</option>
-            <option class="authors__option" value="1">One</option>
-            <option class="authors__option" value="2">Two</option>
-            <option class="authors__option" value="3">Three</option>
+          <select class="authors__select" id="sortSelect">
+            <option class="authors__option" selected disabled>Сортировать по ...</option>
+            <option class="authors__option" value="name">Имени</option>
+            <option class="authors__option" value="surname">Фамилии</option>
+            <option class="authors__option" value="patronymic">Отчеству</option>
           </select>
           <div class="authors__btnwrapper">
-            <button class="authors__btn btn" type="button">Sort</button>
+            <button class="authors__btn btn" type="button" id="sortButton">Sort</button>
           </div>
         </div>
         <button type="button" class="btn btn-outline-primary btn-block mt-4" id='addNewGenre'>Новый жанр</button>
@@ -85,7 +85,7 @@
           <form id="modal">
             <div class="form-group">
               <label for="bookTitle" class="col-form-label">Название:</label>
-              <input type="text" class="form-control" id="bookTitle" pattern="[A-Za-zА-Яа-яЁё0-9]+$" required>
+              <input type="text" class="form-control" id="bookTitle" pattern="[A-Za-zА-Яа-яЁё0-9\s]{1,30}" required>
             </div>
             <div class="form-group">
               <label for="pageAmount" class="col-form-label">Количество страниц:</label>
@@ -124,7 +124,7 @@
             </div>
             <div class="form-group">
               <label for="bookTitle" class="col-form-label">Название:</label>
-              <input type="text" class="form-control" id="modalbook__bookTitle" pattern="^[A-Za-zА-Яа-яЁё0-9\s]+$" required>
+              <input type="text" class="form-control" id="modalbook__bookTitle" pattern="[A-Za-zА-Яа-яЁё0-9\s]{1,30}" required>
             </div>
             <div class="form-group">
               <label for="pageAmount" class="col-form-label">Количество страниц:</label>
