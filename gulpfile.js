@@ -3,14 +3,10 @@ var gulp = require('gulp'),
 	scss = require('gulp-sass'),
 	browsersync = require('browser-sync'),
 	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
 	cleancss = require('gulp-clean-css'),
 	rename = require('gulp-rename'),
 	autoprefixer = require('gulp-autoprefixer'),
-	notify = require("gulp-notify"),
-	imagemin = require('gulp-imagemin'),
-	pngquant = require('imagemin-pngquant'),
-	cache = require('gulp-cache');
+	notify = require("gulp-notify");
 
 gulp.task('browser-sync', function () {
 	browsersync({
@@ -64,20 +60,8 @@ gulp.task('watch', ['scss', 'js', 'browser-sync'], function () {
 	gulp.watch('app/*.html', browsersync.reload);
 });
 
-gulp.task('img', function () {
-	return gulp.src('app/img/**/*')
-		.pipe(cache(imagemin({
-			interlaced: true,
-			progressive: true,
-			svgoPlugins: [{
-				removeViewBox: false
-			}],
-			use: [pngquant()]
-		})))
-		.pipe(gulp.dest('docs/img'));
-});
 
-gulp.task('docs', ['img', 'scss', 'js'], function () {
+gulp.task('docs', ['scss', 'js'], function () {
 
 	var buildCss = gulp.src('app/css/main.min.css')
 		.pipe(gulp.dest('docs/css'));
@@ -89,6 +73,5 @@ gulp.task('docs', ['img', 'scss', 'js'], function () {
 		.pipe(gulp.dest('docs'));
 
 });
-
 
 gulp.task('default', ['watch']);

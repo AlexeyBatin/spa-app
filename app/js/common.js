@@ -44,7 +44,7 @@ setInterval(function () {
 
 ListRender(localValue);
 
-// MODALS
+// MODALS & EVENTS
 let bookModal = document.getElementById('modal');
 bookModal.onsubmit = (evt) => {
   const authorID = document.getElementById('authorID').value;
@@ -174,7 +174,7 @@ AddBookButton.onclick = () => {
 }
 
 let btnDeleteAuthor = document.getElementById('buttonDeleteAuthor');
-btnDeleteAuthor.onclick = function () {
+btnDeleteAuthor.onclick = () => {
   let authorID = document.getElementById('authorID').value;
   DeleteAuthor(authorID);
 }
@@ -202,24 +202,8 @@ sortButton.onclick = () => {
   SortList(sortSelect);
 }
 
-function SortList(value) {
-  localValue.sort(sortByField(value));
-  ListRender(localValue);
-}
 
-function sortByField(name) {
-  return function (a, b) {
-    if (a[name] > b[name]) {
-      return 1;
-    }
-    if (a[name] < b[name]) {
-      return -1;
-    }
-    return 0;
-  }
-}
 // FUNCTIONS
-
 
 function ListRender(localValue) {
   let remove = document.getElementById('list');
@@ -306,13 +290,6 @@ function CardRender(id) {
       cardButton.classList.add('btn', 'btn-primary', 'card__button', 'card__button--hidden');
       cardButton.innerHTML = `Сохранить`;
       card.appendChild(cardButton);
-      // let cardSelect = document.createElement('select');
-      // cardSelect.setAttribute('id', 'cardSelect')
-      // cardSelect.innerHTML = `<option class="authors__option" selected disabled>Сортировать по ...</option>
-      // <option class="authors__option" value="title">Названию</option>
-      // <option class="authors__option" value="pageAmount">Количеству страниц</option>
-      // <option class="authors__option" value="patronymic">Отчеству</option>`
-      // card.appendChild(cardSelect);
       RenderBooks(element);
     }
   });
@@ -404,6 +381,22 @@ function DeleteBook(id, bookID) {
   }
 }
 
+function SortList(value) {
+  localValue.sort(sortByField(value));
+  ListRender(localValue);
+}
+
+function sortByField(name) {
+  return function (a, b) {
+    if (a[name] > b[name]) {
+      return 1;
+    }
+    if (a[name] < b[name]) {
+      return -1;
+    }
+    return 0;
+  }
+}
 
 function DeleteAuthor(authorID) {
   if (confirm('Вы уверены что хотите удалить автора??')) {
