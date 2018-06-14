@@ -1,0 +1,131 @@
+@import "vars";
+@import "libs";
+::placeholder {
+  color: #666;
+}
+
+::selection {
+  background-color: $accent;
+  color: #fff;
+}
+
+body {
+  font-size: 16px;
+  min-width: 320px;
+  position: relative;
+  line-height: 1.65;
+  overflow-x: hidden;
+  color: #000;
+  background: #fff;
+  input,
+  textarea {
+    border: #666 1px solid;
+    outline: none;
+    &:focus:required:invalid {
+      border-color: red;
+    }
+    &:required:valid {
+      border-color: green;
+    }
+  }
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  &.img-width {
+    width: 100%;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+.authors {
+  @extend .col-lg-2;
+  @at-root #{&}__sort {
+    margin-top: 2em;
+    @extend .input-group;
+  }
+  @at-root #{&}__select {
+    @extend .custom-select;
+  }
+  @at-root #{&}__btnwrapper {
+    @extend .input-group-append;
+  }
+  @at-root #{&}__btn {
+    @extend .btn-outline-secondary;
+  }
+  @at-root #{&}__btn--primary {
+    margin-top: 2em;
+    display: block;
+    width: 100%;
+    @extend .btn-primary,
+    .btn-lg;
+  }
+  @at-root #{&}__list {
+    margin-top: 2em;
+    @extend .list-group;
+  }
+  @at-root #{&}__item {
+    @extend .list-group-item,
+    .list-group-item-action;
+    &--active {
+      @extend .active;
+    }
+  }
+}
+
+.viewbox {
+  margin-top: 2em;
+  @extend .col-lg-8;
+}
+
+.card {
+  @extend .border-primary;
+  @at-root #{&}__info {
+    @extend .card-body;
+  }
+  @at-root #{&}__title {
+    @extend .text-center,
+    .display-4,
+    .mb-4;
+  }
+  @at-root #{&}__table {
+    @extend .card-body,.table-responsive,.table-striped;
+  }
+}
+
+.actions {
+  @extend .col-lg-2;
+  @at-root #{&}__buttons {
+    margin-top: 2em;
+    display: block;
+    @extend .btn-group-vertical;
+  }
+}
+
+.right {
+  text-align: right;
+}
+
+.form-group--hidden {
+  display: none;
+}
+
+.card__button {
+  display: block;
+  margin: 0 auto;
+  @at-root #{&}--hidden {
+    display: none;
+  }
+}
+
+@import "media"; // Always at the end

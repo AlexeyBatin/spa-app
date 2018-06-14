@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+  <meta charset="utf-8">
+  <!-- <base href="/"> -->
+
+  <title>Main</title>
+  <meta name="description" content="main page">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Template Basic Images Start -->
+  <meta property="og:image" content="path/to/image.jpg">
+  <link rel="icon" href="img/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
+  <!-- Template Basic Images End -->
+
+  <!-- Custom Browsers Color Start -->
+  <meta name="theme-color" content="#000">
+  <!-- Custom Browsers Color End -->
+
+  <link rel="stylesheet" href="css/main.min.css">
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- AUTHORS -->
+      <aside class="authors">
+        <div class="authors__sort">
+          <select class="authors__select" id="inputGroupSelect">
+            <option class="authors__option" selected disabled>Sort by ...</option>
+            <option class="authors__option" value="1">One</option>
+            <option class="authors__option" value="2">Two</option>
+            <option class="authors__option" value="3">Three</option>
+          </select>
+          <div class="authors__btnwrapper">
+            <button class="authors__btn btn" type="button">Sort</button>
+          </div>
+        </div>
+        <button type="button" class="authors__btn--primary btn" data-toggle="modal" data-target="#ModalAuthor">Добавить автора</button>
+
+        <div class="authors__list" id="list">
+          <!-- <button type="button" class="authors__item authors__item--active">Имя Фамилия</button> -->
+        </div>
+      </aside>
+      <!-- AUTHORS -->
+      <!-- MAIN -->
+      <main class="viewbox">
+        <div class="card">
+          <form class="card__info" id='card'>
+
+          </form>
+          <div class="card__table" id='card__table'>
+
+          </div>
+        </div>
+      </main>
+      <aside class="actions">
+        <div class="actions__buttons" role="group" aria-label="Vertical button group">
+          <button type="button" class="btn btn-lg btn-outline-secondary" id="editCard">Редактировать</button>
+          <button type="button" class="btn btn-lg btn-outline-primary" data-toggle="modal" data-target="#Modal">Добавить книгу</button>
+          <button type="button" class="btn btn-lg btn-outline-danger">Удалить</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+  <!-- ДОБАВИТЬ КНИГУ -->
+  <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">Добавить книгу</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="modal">
+            <div class="form-group">
+              <label for="bookTitle" class="col-form-label">Название:</label>
+              <input type="text" class="form-control" id="bookTitle" pattern="^[A-Za-zА-Яа-яЁё0-9\s]+$" required>
+            </div>
+            <div class="form-group">
+              <label for="pageAmount" class="col-form-label">Количество страниц:</label>
+              <input type="text" class="form-control" id="pageAmount" pattern="[0-9]{1,7}" required></input>
+            </div>
+            <div class="form-group">
+              <label for="genre" class="col-form-label">Жанр:</label>
+              <select class="form-control" id="genre" required>
+                <option>1</option>
+                <option selected>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Отменить</button>
+              <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- РЕДАКТИРОВАТЬ КНИГУ -->
+  <div class="modal fade" id="ModalBook" tabindex="-1" role="dialog" aria-labelledby="ModalBookLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalBookLabel">Редактировать книгу</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="modalbook">
+            <div class="form-group--hidden">
+              <input type="text" class="form-control" id="bookID"></input>
+            </div>
+            <div class="form-group">
+              <label for="bookTitle" class="col-form-label">Название:</label>
+              <input type="text" class="form-control" id="modalbook__bookTitle" pattern="^[A-Za-zА-Яа-яЁё0-9\s]+$" required>
+            </div>
+            <div class="form-group">
+              <label for="pageAmount" class="col-form-label">Количество страниц:</label>
+              <input type="text" class="form-control" id="modalbook__pageAmount" pattern="[0-9]{1,7}" required></input>
+            </div>
+            <div class="form-group">
+              <label for="genre" class="col-form-label">Жанр:</label>
+              <select class="form-control" id="modalbook__genre" required>
+                <option>1</option>
+                <option selected>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Отменить</button>
+              <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ДОБАВИТЬ АВТОРА -->
+  <div class="modal fade" id="ModalAuthor" tabindex="-1" role="dialog" aria-labelledby="ModalAuthorLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalAuthorLabel">Автор</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="modal-author">
+            <div class="form-group--hidden">
+              <input type="text" class="form-control" id="authorID"></input>
+            </div>
+            <div class="form-group">
+              <label for="surname" class="col-form-label">Фамилия:</label>
+              <input type="text" class="form-control" id="surname" pattern="[A-Za-zА-Яа-яЁё]{2,}" required></input>
+            </div>
+            <div class="form-group">
+              <label for="name" class="col-form-label">Имя:</label>
+              <input type="text" class="form-control" id="name" pattern="[A-Za-zА-Яа-яЁё]{2,}" required>
+            </div>
+            <div class="form-group">
+              <label for="patronymic" class="col-form-label">Отчество:</label>
+              <input type="text" class="form-control" id="patronymic" pattern="[A-Za-zА-Яа-яЁё]{2,}"></input>
+            </div>
+            <div class="form-group">
+              <label for="birthday" class="col-form-label">День рождения:</label>
+              <input type="date" class="form-control" id="birthday" required></input>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Отменить</button>
+              <button type="submit" class="btn btn-primary">Сохранить</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <script src="js/scripts.min.js"></script>
+
+</body>
+
+</html>
