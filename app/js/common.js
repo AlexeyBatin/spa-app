@@ -29,18 +29,11 @@ class Book {
   }
 }
 
-
 let localValue = JSON.parse(localStorage.getItem('authors')) == undefined ? [] : JSON.parse(localStorage.getItem('authors'));
 Book.count = localValue.length;
 Author.count = localValue.length;
 
 let genres = JSON.parse(localStorage.getItem('genres')) == undefined ? [] : JSON.parse(localStorage.getItem('genres'));
-
-setInterval(function () {
-  console.log(localValue);
-  localStorage.setItem('genres', JSON.stringify(genres));
-  localStorage.setItem('authors', JSON.stringify(localValue));
-}, 8000);
 
 ListRender(localValue);
 
@@ -56,6 +49,7 @@ bookModal.onsubmit = (evt) => {
       element.books.push(new Book(title, pageAmount, genre));
     }
   });
+  localStorage.setItem('authors', JSON.stringify(localValue));
   $('#Modal').modal('hide');
   document.getElementById('authorID').value = '';
   document.getElementById('bookTitle').value = '';
@@ -85,6 +79,7 @@ bookChangeModal.onsubmit = (evt) => {
       });
     }
   });
+  localStorage.setItem('authors', JSON.stringify(localValue));
   $('#ModalBook').modal('hide');
   evt.preventDefault();
   CardRender(authorID);
@@ -99,13 +94,13 @@ authorModal.onsubmit = (evt) => {
   let patronymic = document.getElementById('patronymic').value;
   let newAuthor = new Author(name, surname, birthday, patronymic);
   localValue.push(newAuthor);
+  localStorage.setItem('authors', JSON.stringify(localValue));
   ListAdd(newAuthor);
   $('#ModalAuthor').modal('hide');
   document.getElementById('birthday').value = '';
   document.getElementById('name').value = '';
   surname = document.getElementById('surname').value = '';
   patronymic = document.getElementById('patronymic').value = '';
-  console.log(localValue);
   evt.preventDefault();
 };
 
@@ -144,7 +139,7 @@ card.onsubmit = (evt) => {
       element.birthday = birthday.value;
     }
   });
-
+  localStorage.setItem('authors', JSON.stringify(localValue));
   let elements = [surname, name, patronymic, birthday];
   elements.forEach(element => {
     element.setAttribute('readonly', '');
@@ -189,6 +184,7 @@ addNewGenre.onclick = () => {
     let checkGenre = genres.indexOf(formatedGenre);
     if (!~checkGenre) {
       genres.push(formatedGenre);
+      localStorage.setItem('genres', JSON.stringify(genres));
     } else {
       alert('Такой жанр уже есть');
     }
@@ -293,6 +289,7 @@ function CardRender(id) {
       RenderBooks(element);
     }
   });
+  localStorage.setItem('authors', JSON.stringify(localValue));
 }
 
 function RenderBooks(element) {
@@ -377,6 +374,7 @@ function DeleteBook(id, bookID) {
         }
       }
     });
+    localStorage.setItem('authors', JSON.stringify(localValue));
     CardRender(id);
   }
 }
@@ -406,6 +404,7 @@ function DeleteAuthor(authorID) {
         break;
       }
     }
+    localStorage.setItem('authors', JSON.stringify(localValue));
     let remove = document.getElementById('card__table');
     while (remove.firstChild) {
       remove.removeChild(remove.firstChild);
