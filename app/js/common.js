@@ -316,20 +316,41 @@ function RenderBooks(element) {
   let card__table = document.getElementById('card__table');
   card__table.appendChild(table);
   let books = element.books;
-
-  books.forEach(element => {
-    let row = document.createElement('tr');
-    row.innerHTML = `<td>${element.title}</td>
-    <td>${element.pageAmount}</td>
-    <td>${element.genre}</td>
-    <td class="right">
-      <div class="btn-group btn-group-sm" role="group" aria-label="tableActions" id="action-col" >
-        <button type="button" class="button__change btn btn-secondary"  data-toggle="modal" data-target="#ModalBook" data-bookID = "${element.ID}">Редактировать</button>
-        <button type="button" class="button__delete btn btn-danger" data-bookID = "${element.ID}">Удалить</button>
-      </div>
-    </td>`;
-    tablebody.appendChild(row);
-  });
+  let searchBookField = document.getElementById('searchBookField');
+  let searchQuery = searchBookField.value.toLowerCase();
+  if (searchQuery == ' ' || searchQuery == '') {
+    books.forEach(element => {
+      let row = document.createElement('tr');
+      row.innerHTML = `<td>${element.title}</td>
+      <td>${element.pageAmount}</td>
+      <td>${element.genre}</td>
+      <td class="right">
+        <div class="btn-group btn-group-sm" role="group" aria-label="tableActions" id="action-col" >
+          <button type="button" class="button__change btn btn-secondary"  data-toggle="modal" data-target="#ModalBook" data-bookID = "${element.ID}">Редактировать</button>
+          <button type="button" class="button__delete btn btn-danger" data-bookID = "${element.ID}">Удалить</button>
+        </div>
+      </td>`;
+      tablebody.appendChild(row);
+    });
+  } else {
+    var searchBooks = books.filter(function (el) {
+      var searchValue = el.title.toLowerCase();
+      return searchValue.indexOf(searchQuery) !== -1;
+    });
+    searchBooks.forEach(element => {
+      let row = document.createElement('tr');
+      row.innerHTML = `<td>${element.title}</td>
+      <td>${element.pageAmount}</td>
+      <td>${element.genre}</td>
+      <td class="right">
+        <div class="btn-group btn-group-sm" role="group" aria-label="tableActions" id="action-col" >
+          <button type="button" class="button__change btn btn-secondary"  data-toggle="modal" data-target="#ModalBook" data-bookID = "${element.ID}">Редактировать</button>
+          <button type="button" class="button__delete btn btn-danger" data-bookID = "${element.ID}">Удалить</button>
+        </div>
+      </td>`;
+      tablebody.appendChild(row);
+    });
+  }
 
   SortGrid();
   let btnchange = document.getElementsByClassName("button__change");
