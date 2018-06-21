@@ -81,7 +81,16 @@ strong {
     }
   }
 }
-
+.search-group {
+  margin-top: 2em;
+  @extend .input-group;
+  @at-root #{&}__text {
+    @extend .input-group-text;
+  }
+}
+.search-group-prepend {
+  @extend .input-group-prepend;
+}
 .viewbox {
   margin-top: 2em;
   @extend .col-lg-8;
@@ -135,5 +144,6 @@ th {
     cursor: pointer;
   }
 }
+
 
 @import "media"; // Always at the end

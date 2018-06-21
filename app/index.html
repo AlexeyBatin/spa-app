@@ -32,6 +32,16 @@
     <div class="row">
       <!-- AUTHORS -->
       <aside class="authors">
+        <div class="search-group">
+          <div class="search-group-prepend">
+            <span class="search-group__text" id="basic-addon1">&#x1F50D;</span>
+          </div>
+          <input type="text" class="form-control" placeholder="Название книги" aria-label="searchBook" id='searchBookField' aria-describedby="basic-addon1">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id='searchBookButton'>Поиск</button>
+          </div>
+        </div>
+        <button type="button" class="btn btn-outline-primary btn-block mt-4" id='addNewGenre'>Новый жанр</button>
         <div class="authors__sort">
           <select class="authors__select" id="sortSelect">
             <option class="authors__option" selected disabled>Сортировать по ...</option>
@@ -43,8 +53,7 @@
             <button class="authors__btn btn" type="button" id="sortButton">Sort</button>
           </div>
         </div>
-        <button type="button" class="btn btn-outline-primary btn-block mt-4" id='addNewGenre'>Новый жанр</button>
-        <button type="button" class="authors__btn--primary btn" data-toggle="modal" data-target="#ModalAuthor">Новый автор</button>
+        <button type="button" class="btn btn-outline-primary btn-block mt-4" data-toggle="modal" data-target="#ModalAuthor">Новый автор</button>
         <div class="authors__list" id="list">
           <!-- <button type="button" class="authors__item authors__item--active">Имя Фамилия</button> -->
         </div>
