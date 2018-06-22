@@ -30,8 +30,8 @@ class Book {
 }
 
 let localValue = JSON.parse(localStorage.getItem('authors')) == undefined ? [] : JSON.parse(localStorage.getItem('authors'));
-Author.count = localValue.length;
-Book.count = calculateAmount(localValue);
+Author.count = calculateAuthorID(localValue);
+Book.count = calculateBookID(localValue);
 
 let genres = JSON.parse(localStorage.getItem('genres')) == undefined ? [] : JSON.parse(localStorage.getItem('genres'));
 
@@ -412,13 +412,27 @@ searchBookButton.onclick = function () {
   ListRender(displayAuthors);
 }
 
+function calculateAuthorID(array) {
+  let max = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (max < array[i].ID) {
+      max = array[i].ID;
+    }
+  }
+  return max;
+}
 
-function calculateAmount(array) {
-  let counter = 0;
+function calculateBookID(array) {
+  let max = 0;
   array.forEach(element => {
-    counter += element.books.length;
+    let bookList = element.books;
+    for (let i = 0; i < bookList.length; i++) {
+      if (max < bookList[i].ID) {
+        max = bookList[i].ID;
+      }
+    }
   });
-  return counter;
+  return max;
 }
 
 function DeleteBook(id, bookID) {
